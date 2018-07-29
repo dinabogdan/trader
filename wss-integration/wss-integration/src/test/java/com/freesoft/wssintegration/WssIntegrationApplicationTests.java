@@ -9,6 +9,7 @@ import com.freesoft.wssintegration.model.wss.WssBaseRequest;
 import com.freesoft.wssintegration.model.wss.WssLoginRequest;
 import com.freesoft.wssintegration.websocket.WssClient;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -20,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
-@Log
+@Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class WssIntegrationApplicationTests {
@@ -30,6 +31,7 @@ public class WssIntegrationApplicationTests {
 
     @Test
     public void contextLoads() {
+        Assert.assertNotNull(wssClient);
     }
 
     @Test
@@ -81,6 +83,5 @@ public class WssIntegrationApplicationTests {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

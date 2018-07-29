@@ -1,9 +1,12 @@
 package com.freesoft.wssintegration.websocket;
 
 
-import com.freesoft.wssintegration.entity.LoginEntity;
-import com.freesoft.wssintegration.repository.LoginRepository;
-import lombok.extern.java.Log;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.freesoft.wssintegration.model.response.login.LoginResponse;
+import com.freesoft.wssintegration.service.dao.LoginDao;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 
 import javax.websocket.Endpoint;
@@ -12,16 +15,13 @@ import javax.websocket.MessageHandler;
 import javax.websocket.Session;
 import java.io.IOException;
 
-@Log
+@Slf4j
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class WssEndpoint extends Endpoint {
 
     private Session session;
 
-    private final LoginRepository loginRepository;
-
-    public WssEndpoint(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
-    }
+    private final LoginDao loginDao;
 
     @Override
     public void onOpen(Session session, EndpointConfig endpointConfig) {
@@ -34,10 +34,14 @@ public class WssEndpoint extends Endpoint {
                 JSONObject message = new JSONObject(messageReceived);
                 Integer pid = (Integer) ((JSONObject) message.get("bm")).get("pid");
                 if (pid == 101) {
-                    LoginEntity login = new LoginEntity();
-                    String sidValue = message.getJSONObject("bm").getJSONObject("payload").getJSONObject("user").getString("sid");
-                    login.setSessionId(sidValue);
-                    loginRepository.save(login);
+                    byte[] jsonData = message.toString().getBytes();
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    try {
+                        LoginResponse loginResponse = objectMapper.readValue(jsonData, LoginResponse.class);
+                        log.info("### LoginResponse: {}", loginResponse);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 WssClient.messageLatch.countDown();
             }
