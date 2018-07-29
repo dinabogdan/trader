@@ -1,11 +1,9 @@
 package com.freesoft.wssintegration.controller;
 
 import com.freesoft.wssintegration.model.request.LoginRequest;
-import com.freesoft.wssintegration.model.wss.WssBaseRequest;
-import com.freesoft.wssintegration.JsonObjectFactory;
-import com.freesoft.wssintegration.model.wss.WssLoginRequest;
 import com.freesoft.wssintegration.entity.LoginEntity;
 import com.freesoft.wssintegration.repository.LoginRepository;
+import com.freesoft.wssintegration.websocket.WssClient;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

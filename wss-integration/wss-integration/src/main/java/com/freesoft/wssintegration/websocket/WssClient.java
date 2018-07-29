@@ -1,6 +1,5 @@
-package com.freesoft.wssintegration.controller;
+package com.freesoft.wssintegration.websocket;
 
-import com.freesoft.wssintegration.WssEndpoint;
 import com.freesoft.wssintegration.repository.LoginRepository;
 import lombok.extern.java.Log;
 import org.glassfish.tyrus.client.ClientManager;

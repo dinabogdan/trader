@@ -1,7 +1,6 @@
-package com.freesoft.wssintegration;
+package com.freesoft.wssintegration.websocket;
 
 
-import com.freesoft.wssintegration.controller.WssClient;
 import com.freesoft.wssintegration.entity.LoginEntity;
 import com.freesoft.wssintegration.repository.LoginRepository;
 import lombok.extern.java.Log;
@@ -32,7 +31,6 @@ public class WssEndpoint extends Endpoint {
             @Override
             public void onMessage(String messageReceived) {
                 log.info("### MessageReceived: " + messageReceived);
-                FileUtils.writeToFile(messageReceived);
                 JSONObject message = new JSONObject(messageReceived);
                 Integer pid = (Integer) ((JSONObject) message.get("bm")).get("pid");
                 if (pid == 101) {
