@@ -1,6 +1,7 @@
 package com.freesoft.wssintegration.websocket;
 
 import com.freesoft.wssintegration.repository.LoginRepository;
+import com.freesoft.wssintegration.service.dao.LoginDao;
 import lombok.extern.java.Log;
 import org.glassfish.tyrus.client.ClientManager;
 import org.json.JSONObject;
@@ -20,15 +21,15 @@ public class WssClient {
     final static CountDownLatch messageLatch = new CountDownLatch(1);
     final static String uri = "wss://demo.arenaxt.ro/ws/channel/";
 
-    private final LoginRepository loginRepository;
     private final ClientManager clientManager;
     private final WssEndpoint wssEndpoint;
+    private final LoginDao loginDao;
     private Session session = null;
 
-    private WssClient(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
+    private WssClient(LoginDao loginDao) {
         this.clientManager = new ClientManager();
-        this.wssEndpoint = new WssEndpoint(loginRepository);
+        this.wssEndpoint = new WssEndpoint(loginDao);
+        this.loginDao = loginDao;
         try {
             this.session = this.clientManager.connectToServer(wssEndpoint, URI.create(uri));
         } catch (DeploymentException e) {

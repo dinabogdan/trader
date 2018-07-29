@@ -16,12 +16,14 @@ import javax.websocket.Session;
 import java.io.IOException;
 
 @Slf4j
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class WssEndpoint extends Endpoint {
 
     private Session session;
-
     private final LoginDao loginDao;
+
+    WssEndpoint(LoginDao loginDao) {
+        this.loginDao = loginDao;
+    }
 
     @Override
     public void onOpen(Session session, EndpointConfig endpointConfig) {
@@ -39,6 +41,7 @@ public class WssEndpoint extends Endpoint {
                     try {
                         LoginResponse loginResponse = objectMapper.readValue(jsonData, LoginResponse.class);
                         log.info("### LoginResponse: {}", loginResponse);
+                        loginDao.save(loginResponse);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
