@@ -7,15 +7,12 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
-
 @Component
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class LoginDao {
 
     private final LoginRepository loginRepository;
 
-    @Transactional
     public void save(LoginResponse loginResponse) {
         LoginEntity loginEntity = LoginEntity.builder()
                 .sessionId(loginResponse.getPayload().getUser().getSid())
