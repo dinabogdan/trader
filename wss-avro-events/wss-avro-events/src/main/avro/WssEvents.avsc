@@ -1,0 +1,20 @@
+[
+    {
+        "namespace": "com.freesoft.wss.events.login",
+        "type": "record",
+        "name": "LoginEvent",
+        "doc": "The event that is assembled from the response that is received from the web socket after a Login request is performed",
+        "fields": [
+            {
+                "name": "sessionId",
+                "type": "string",
+                "doc": "The sessionId that is received after performing a Login."
+            },
+            {
+                "name": "occurredAt",
+                "type": "long",
+                "doc": "The timestamp that represents the moment when the sessionId was retrieved."
+            }
+        ]
+    }
+]
