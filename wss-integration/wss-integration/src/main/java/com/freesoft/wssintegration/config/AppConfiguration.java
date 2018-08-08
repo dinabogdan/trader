@@ -1,5 +1,6 @@
 package com.freesoft.wssintegration.config;
 
+import com.freesoft.wssintegration.config.properties.DataSourceProperties;
 import com.freesoft.wssintegration.utils.HikariConfigAssembler;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;

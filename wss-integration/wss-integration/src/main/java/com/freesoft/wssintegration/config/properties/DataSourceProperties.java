@@ -1,6 +1,5 @@
-package com.freesoft.wssintegration.config;
+package com.freesoft.wssintegration.config.properties;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

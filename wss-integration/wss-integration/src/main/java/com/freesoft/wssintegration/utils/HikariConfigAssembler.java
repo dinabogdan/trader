@@ -1,6 +1,6 @@
 package com.freesoft.wssintegration.utils;
 
-import com.freesoft.wssintegration.config.DataSourceProperties;
+import com.freesoft.wssintegration.config.properties.DataSourceProperties;
 import com.zaxxer.hikari.HikariConfig;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
