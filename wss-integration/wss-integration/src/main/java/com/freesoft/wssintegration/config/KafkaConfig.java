@@ -13,10 +13,14 @@ import java.util.Map;
 public class KafkaConfig {
 
     @Bean
-    public Map<String, Object> producerConfigs(KafkaProperties kafkaProperties) {
+    public Map<String, Object> producerFactory(KafkaProperties kafkaProperties) {
         Map<String, Object> properties = new HashMap<>();
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-//        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, Avro)
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, String.class);
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
         return properties;
     }
+
+    @Bean
+    public ProducerFactory<String, LoginEvent>
 }
